@@ -3,6 +3,7 @@ Django settings for backend project.
 """
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,16 +57,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # ============================================================
-# DATABASE CONFIGURATION — Insert your PostgreSQL credentials
+# DATABASE CONFIGURATION (safe fallback + optional env support)
 # ============================================================
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Form1_DB',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'Form1_DB'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '1234'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -88,6 +90,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ============================================================
 # CORS CONFIGURATION
 # ============================================================
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
 ]
@@ -95,6 +98,7 @@ CORS_ALLOWED_ORIGINS = [
 # ============================================================
 # REST FRAMEWORK
 # ============================================================
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',

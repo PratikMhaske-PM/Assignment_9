@@ -1,23 +1,15 @@
-# Django
-__pycache__/
-*.pyc
-db.sqlite3
-.env
-
-# Virtual Environment
-venv/
-env/
-
-# PostgreSQL (if local dumps)
-*.sql
-
 # Angular
 node_modules/
+.angular/
 dist/
 
-# IDE
+# Django
+venv/
+__pycache__/
+*.pyc
+.env
+
+# OS / IDE
 .vscode/
 .idea/
-
-# OS
 .DS_Store
