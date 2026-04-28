@@ -1,0 +1,64 @@
+<div class="form-page">
+  <div class="form-container">
+
+    <h1 class="title">Create New Entry</h1>
+    <p class="subtitle">Fill the details carefully and submit</p>
+
+    <form [formGroup]="submissionForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- Full Name -->
+      <div class="field-group" [class.field-error]="isInvalid('full_name')">
+        <label>Full Name</label>
+        <input type="text" formControlName="full_name" placeholder="Enter your name" />
+        
+        <div class="error" *ngIf="isInvalid('full_name')">
+          <span *ngIf="f['full_name'].errors?.['required']">Name is required</span>
+          <span *ngIf="f['full_name'].errors?.['minlength']">Minimum 2 characters</span>
+          <span *ngIf="f['full_name'].errors?.['pattern']">Only letters allowed</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field-group" [class.field-error]="isInvalid('email')">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Enter your email" />
+        
+        <div class="error" *ngIf="isInvalid('email')">
+          <span *ngIf="f['email'].errors?.['required']">Email is required</span>
+          <span *ngIf="f['email'].errors?.['email']">Enter valid email</span>
+        </div>
+      </div>
+
+      <!-- Age -->
+      <div class="field-group" [class.field-error]="isInvalid('age')">
+        <label>Age</label>
+        <input type="number" formControlName="age" placeholder="Enter age" />
+        
+        <div class="error" *ngIf="isInvalid('age')">
+          <span *ngIf="f['age'].errors?.['required']">Age is required</span>
+          <span *ngIf="f['age'].errors?.['min'] || f['age'].errors?.['max']">
+            Age must be between 1–120
+          </span>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="field-group" [class.field-error]="isInvalid('phone')">
+        <label>Phone</label>
+        <input type="tel" formControlName="phone" placeholder="Enter phone number" />
+        
+        <div class="error" *ngIf="isInvalid('phone')">
+          <span *ngIf="f['phone'].errors?.['required']">Phone is required</span>
+          <span *ngIf="f['phone'].errors?.['pattern']">Invalid phone number</span>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" [disabled]="isSubmitting">
+        <span *ngIf="!isSubmitting">Submit</span>
+        <span *ngIf="isSubmitting" class="loader"></span>
+      </button>
+
+    </form>
+  </div>
+</div>
